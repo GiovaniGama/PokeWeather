@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IResultWeatherCity, IWeatherData } from '../interfaces/IWether.interface';
-import { Pokemon, PokemonDetail, PokemonList, ReturnPokemonDetail } from '../interfaces/IPokemon.interface';
+import { PokemonDetail, PokemonList, ReturnPokemonDetail } from '../interfaces/IPokemon.interface';
 @Injectable({
   providedIn: 'root'
 })
