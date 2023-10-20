@@ -19,3 +19,9 @@ export interface IWeatherMain {
     pressure: number;
     humidity: number;
 } 
+
+export interface IResultWeatherCity {
+  temp: number;
+  name: string;
+  description: string;
+}

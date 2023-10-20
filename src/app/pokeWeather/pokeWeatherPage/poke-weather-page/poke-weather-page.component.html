@@ -1,1 +1,13 @@
-<p>poke-weather-page works!</p>
+
+<div>
+    <h2>Informações de Clima</h2>
+    <p>Cidade: {{ resultWeatherCity.name }}</p>
+    <p>Temperatura: {{ resultWeatherCity.temp | number:'1.0-1' }} °C</p>
+    <p>Descrição: {{ resultWeatherCity.description }}</p>
+    <h2>Informações do pokemon</h2>
+    <p>nome: {{ pokemon?.name }}</p>
+    <p>type: {{ pokemon?.types }}</p>
+    <p>img: {{ pokemon?.sprites }}</p>
+    <img [src]="pokemon?.sprites" alt="image of pokemon">
+</div>
+  
