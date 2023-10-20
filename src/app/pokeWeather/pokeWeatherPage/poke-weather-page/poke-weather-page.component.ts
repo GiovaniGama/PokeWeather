@@ -19,11 +19,13 @@ export class PokeWeatherPageComponent implements OnInit {
   };
   typePokemon: string = '';
   pokemon: ReturnPokemonDetail | undefined;
+  pokemons: ReturnPokemonDetail[] | undefined;
 
-  constructor(private _pokeWeatherService: PokeWeatherService){}
+  constructor(
+    private _pokeWeatherService: PokeWeatherService){}
 
   ngOnInit(): void {
-    this.getWeatherPerCity('SAO PAULO')
+    this.getWeatherPerCity('acre')
     this.getPokemon()
   }
 
@@ -42,12 +44,17 @@ export class PokeWeatherPageComponent implements OnInit {
       }
 
       this.typePokemon = this._pokeWeatherService.getPokemonByWeather(this.resultWeatherCity)
+      console.log(this.typePokemon)
     })
   }
 
   getPokemon(){
     this._pokeWeatherService.playloadPokemon().subscribe(el => {
-      this.pokemon = el.find((pokemon) => pokemon.types === this.typePokemon)
+      this.pokemons = el.filter((pokemon) => pokemon.types.includes(this.typePokemon))
+
+      const randomIndex = Math.floor(Math.random() * this.pokemons.length);
+      const randomPokemon = this.pokemons[randomIndex];
+      this.pokemon = randomPokemon;
     })
   }
 
