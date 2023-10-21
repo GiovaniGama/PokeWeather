@@ -21,7 +21,6 @@ export class PokeWeatherService {
           weather: response.weather,
           main: response.main
         })),
-
       );
   }
 

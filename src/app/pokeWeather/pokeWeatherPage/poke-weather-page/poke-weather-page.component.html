@@ -1,14 +1,30 @@
-
-<div>
-    <h2>Informações de Clima</h2>
-    <p>Cidade: {{ resultWeatherCity.name }}</p>
-    <p>Temperatura: {{ resultWeatherCity.temp | number:'1.0-1' }} °C</p>
-    <p>Descrição: {{ resultWeatherCity.description }}</p>
-    <h2>Informações do pokemon</h2>
-    <p>nome: {{ pokemon?.name }}</p>
-    <p>type: {{ pokemon?.types }}</p>
-    <p>img: {{ pokemon?.sprites }}</p>
-    <img [src]="pokemon?.sprites" alt="image of pokemon">
-</div>
-
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form__container">
+        <div class="form__input">
+            <mat-form-field class="form__input--mat-form">
+                <mat-label>City</mat-label>
+                <input required formControlName="nameCity" matInput placeholder="Ex. Acre">
+                <mat-error *ngIf="validTouched('nameCity')">
+                    Field cannot be empty!
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form__button">
+            <button class="form__button--element" [disabled]="form.value.nameCity == null || validTouched('nameCity')  || (validTouched('nameCity') && form.value.nameCity == null)" mat-raised-button type="submit" color="primary">Search</button>
+            <mat-error *ngIf="form.value.nameCity == null || validTouched('nameCity')  || (validTouched('nameCity') && form.value.nameCity == null)">
+                Field cannot be empty, fill it in and the button will be enabled!
+            </mat-error>
+        </div>
+    </div>
+    <div *ngIf="showPokemon">
+        <h2>Informações de Clima</h2>
+        <p>Cidade: {{ resultWeatherCity?.name }}</p>
+        <p>Temperatura: {{ resultWeatherCity?.temp | number:'1.0-1' }} °C</p>
+        <p>Descrição: {{ resultWeatherCity?.description }}</p>
+        <h2>Informações do pokemon</h2>
+        <p>nome: {{ pokemon?.name }}</p>
+        <p>type: {{ pokemon?.types }}</p>
+        <img [src]="pokemon?.sprites" alt="image of pokemon">
+    </div>
+</form>
 <app-loading></app-loading>
