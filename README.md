@@ -1,27 +1,56 @@
-# PokeWeather
+# Projeto Angular de Previsão do Tempo e Pokémon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.7.
+## Visão Geral
 
-## Development server
+Este é um projeto Angular que combina a previsão do tempo local com a exibição de Pokémon com base na temperatura atual. Ele usa o Angular Material para criar uma interface do usuário amigável.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Funcionalidades
 
-## Code scaffolding
+- Os usuários podem inserir o nome de uma cidade.
+- O projeto obtém a previsão do tempo para essa cidade.
+- Com base na temperatura, o projeto seleciona um Pokémon correspondente.
+- A interface do usuário exibe informações sobre a cidade, temperatura, descrição do clima e o Pokémon selecionado.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tecnologias Utilizadas
 
-## Build
+- Angular: Framework front-end.
+- Angular Material: Biblioteca de design e UI.
+- PokeAPI: API de informações sobre Pokémon.
+- OpenWeatherMap API: API de previsão do tempo.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Estrutura do Projeto
 
-## Running unit tests
+A estrutura do projeto inclui os seguintes componentes:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- `PokeWeatherPageComponent`: O componente principal que lida com a lógica da aplicação e a exibição da interface.
+- `PokeWeatherService`: Um serviço que faz chamadas à PokeAPI e OpenWeatherMap API para obter dados.
+- `LoadingComponent`: Um componente de carregamento exibido durante as solicitações assíncronas.
+- Outros componentes, módulos e arquivos relacionados à interface do usuário.
 
-## Running end-to-end tests
+## Fluxo de Trabalho
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. O usuário insere o nome de uma cidade na interface.
+2. O aplicativo faz uma solicitação à API de previsão do tempo (OpenWeatherMap API) para obter informações sobre a temperatura e o clima da cidade.
+3. Com base na temperatura, o aplicativo determina um tipo de Pokémon correspondente.
+4. O aplicativo faz uma solicitação à API de informações sobre Pokémon (PokeAPI) para obter Pokémon do tipo correspondente.
+5. Os dados da cidade, temperatura, clima e Pokémon são exibidos na interface do usuário.
 
-## Further help
+## Configuração do Projeto
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Certifique-se de que o projeto esteja configurado com o Angular e o Angular Material instalados. Os serviços de API também devem ser configurados corretamente.
+
+## Instruções de Execução
+
+1. Clone o repositório do projeto.
+
+2. Navegue até a raiz do projeto no terminal e rode npm install.
+
+3. Execute o comando `ng serve` para iniciar o servidor de desenvolvimento.
+
+4. Abra um navegador e acesse `http://localhost:4200/` para usar o aplicativo.
+
+
+## Autores
+
+- [Giovani Gama]
+
