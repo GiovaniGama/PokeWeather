@@ -22,7 +22,11 @@ export interface PokemonDetail {
     name: string;
     types: PokemonType[];
     sprites: {
-        front_default: string;
+        other: {
+            dream_world: {
+                front_default: string
+            }
+        };
     };
 }
 

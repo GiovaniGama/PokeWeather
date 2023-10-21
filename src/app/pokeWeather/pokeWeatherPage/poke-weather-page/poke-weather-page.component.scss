@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 60%;
+    flex-direction: column;
+    margin: 10px 0 10px 0;
     &__container{
         display: flex;
         justify-content: center;
@@ -31,5 +32,34 @@
             margin-bottom: 10px;
             width: 7rem;
         }
+    }
+
+    &__card{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        border: 2px solid #000;
+        border-radius: 1rem;
+        padding: 2rem;
+
+        &--information-weather{
+            margin-right: 20px;
+        }
+
+        &--title-information{
+            h3{
+                font-weight: 700;
+            }
+        }
+
+        &--image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: 200px;
+            }
+        }
+
     }
 }

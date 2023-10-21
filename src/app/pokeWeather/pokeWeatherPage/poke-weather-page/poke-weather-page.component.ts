@@ -3,6 +3,8 @@ import { PokeWeatherService } from '../services/poke-weather.service';
 import { IResultWeatherCity } from '../interfaces/IWether.interface';
 import { ReturnPokemonDetail } from '../interfaces/IPokemon.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DialogErrorComponent } from 'src/app/components/dialog-error/dialog-error.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-poke-weather-page',
@@ -15,14 +17,15 @@ export class PokeWeatherPageComponent implements OnInit {
   inputValue: string = '';
   resultWeatherCity: IResultWeatherCity | undefined;
   typePokemon: string = '';
-  pokemon: ReturnPokemonDetail | undefined;
+  pokemon: ReturnPokemonDetail | null | undefined;
   pokemons: ReturnPokemonDetail[] | undefined;
   form!: FormGroup;
-  showPokemon: boolean = false;
+  showInfo: boolean = false;
 
   constructor(
     private _pokeWeatherService: PokeWeatherService,
-    private _formBuilder: FormBuilder){}
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog){}
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -33,42 +36,55 @@ export class PokeWeatherPageComponent implements OnInit {
   
   async onSubmit(){
     await this.getWeatherPerCity(this.form.value.nameCity)
-    await this.getPokemon()
 
     this.form.reset();
   }
 
-  async getWeatherPerCity(cityName: string){
-    this._pokeWeatherService.getWeatherPerCity(cityName).subscribe(el => {
-      const {temp, name, description} = {
+  async getWeatherPerCity(cityName: string) {
+    this._pokeWeatherService.getWeatherPerCity(cityName).subscribe(async el => {
+      const { temp, name, description } = {
         temp: (el.main.temp - 273.15),
         name: el.name,
         description: el.weather[0].description
-      }
+      };
 
       this.resultWeatherCity = {
         temp,
         name,
         description
-      }
+      };
 
-      this.typePokemon = this._pokeWeatherService.getPokemonByWeather(this.resultWeatherCity)
-    })
+      this.typePokemon = this._pokeWeatherService.getPokemonByWeather(this.resultWeatherCity);
+      await this.getPokemon();
+    },
+    error => {
+      this.openDialog(`Error in obtaining climate data`);
+      console.error('Error in obtaining climate data', error);
+    });
   }
 
   async getPokemon(){
-    this.showPokemon = false;
     this._pokeWeatherService.playloadPokemon().subscribe(el => {
       this.pokemons = el.filter((pokemon) => pokemon.types === this.typePokemon)
-
       const randomIndex = Math.floor(Math.random() * this.pokemons.length);
       const randomPokemon = this.pokemons[randomIndex];
       this.pokemon = randomPokemon;
-      this.showPokemon = true;
-    })
+      this.showInfo = true
+    },
+    error => {
+      this.openDialog(`Error obtaining pokemon data`);
+      console.error('Error obtaining pokemon data:', error);
+    });
   }
 
   validTouched(value: string){
     return !this.form.get(value)?.valid &&this.form.get(value)?.touched
+  }
+
+  openDialog(messageErr: string): void {
+    this.dialog.open(DialogErrorComponent, {
+      width: '250px',
+      data: messageErr
+    });
   }
 }

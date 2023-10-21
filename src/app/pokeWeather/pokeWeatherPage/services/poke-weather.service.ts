@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, finalize, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, forkJoin, map, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IResultWeatherCity, IWeatherData } from '../interfaces/IWether.interface';
 import { PokemonDetail, PokemonList, ReturnPokemonDetail } from '../interfaces/IPokemon.interface';
@@ -20,7 +20,7 @@ export class PokeWeatherService {
           name: response.name,
           weather: response.weather,
           main: response.main
-        })),
+        }))
       );
   }
 
@@ -42,7 +42,7 @@ export class PokeWeatherService {
       map((pokemonDetail: PokemonDetail) => ({
         id: pokemonDetail.id,
         name: pokemonDetail.name,
-        sprites: pokemonDetail.sprites.front_default,
+        sprites: pokemonDetail.sprites.other.dream_world.front_default,
         types: pokemonDetail.types[0].type.name
       })),
     );

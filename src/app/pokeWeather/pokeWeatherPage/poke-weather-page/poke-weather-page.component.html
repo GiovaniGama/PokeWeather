@@ -1,4 +1,7 @@
 <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form__subtitle">
+        <h2>Enter the name of a city:</h2>
+    </div>
     <div class="form__container">
         <div class="form__input">
             <mat-form-field class="form__input--mat-form">
@@ -16,15 +19,27 @@
             </mat-error>
         </div>
     </div>
-    <div *ngIf="showPokemon">
-        <h2>Informações de Clima</h2>
-        <p>Cidade: {{ resultWeatherCity?.name }}</p>
-        <p>Temperatura: {{ resultWeatherCity?.temp | number:'1.0-1' }} °C</p>
-        <p>Descrição: {{ resultWeatherCity?.description }}</p>
-        <h2>Informações do pokemon</h2>
-        <p>nome: {{ pokemon?.name }}</p>
-        <p>type: {{ pokemon?.types }}</p>
-        <img [src]="pokemon?.sprites" alt="image of pokemon">
+    <div class="form__card" *ngIf="showInfo">
+        <div class="form__card--information-weather">
+            <div class="form__card--title-information">
+                <h3>Weather information:</h3>
+            </div>
+            <div class="form__card--informations">
+                <p><b>City:</b> {{ resultWeatherCity?.name }}</p>
+                <p><b>Temp:</b> {{ resultWeatherCity?.temp | number:'1.0-1' }} °C</p>
+                <p><b>Description:</b> {{ resultWeatherCity?.description }}</p>
+            </div>
+            <div class="form__card--title-information">
+                <h3>Pokemon information:</h3>
+            </div>
+            <div class="form__card--informations--pokemon">
+                <p><b>Name:</b> {{ pokemon?.name }}</p>
+                <p><b>Type:</b> {{ pokemon?.types }}</p>
+            </div>
+        </div>
+        <div class="form__card--image">
+            <img [src]="pokemon?.sprites" alt="image of pokemon">
+        </div>
     </div>
 </form>
 <app-loading></app-loading>
