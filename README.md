@@ -49,6 +49,8 @@ Certifique-se de que o projeto esteja configurado com o Angular e o Angular Mate
 
 4. Abra um navegador e acesse `http://localhost:4200/` para usar o aplicativo.
 
+5. Execute o comando `docker compose up` para iniciar o servidor usando a imagem docker.
+
 
 ## Autores
 
