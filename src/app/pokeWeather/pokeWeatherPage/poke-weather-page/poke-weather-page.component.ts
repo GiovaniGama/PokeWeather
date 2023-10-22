@@ -58,7 +58,7 @@ export class PokeWeatherPageComponent implements OnInit {
       await this.getPokemon();
     },
     error => {
-      this.openDialog(`Error in obtaining climate data`);
+      this.openDialog(`City not found!`);
       console.error('Error in obtaining climate data', error);
     });
   }
@@ -72,7 +72,7 @@ export class PokeWeatherPageComponent implements OnInit {
       this.showInfo = true
     },
     error => {
-      this.openDialog(`Error obtaining pokemon data`);
+      this.openDialog(`Error: Error obtaining pokemon data`);
       console.error('Error obtaining pokemon data:', error);
     });
   }
