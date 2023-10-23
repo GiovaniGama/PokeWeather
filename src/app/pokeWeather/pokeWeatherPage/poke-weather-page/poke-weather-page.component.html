@@ -28,6 +28,7 @@
                 <p><b>City:</b> {{ resultWeatherCity?.name }}</p>
                 <p><b>Temp:</b> {{ resultWeatherCity?.temp | number:'1.0-1' }} °C</p>
                 <p><b>Description:</b> {{ resultWeatherCity?.description }}</p>
+                <p><b>it's raining:</b> {{ resultWeatherCity?.description?.includes('rain') ? 'Yes' : 'No' }}</p>
             </div>
             <div class="form__card--title-information">
                 <h3>Pokemon information:</h3>
