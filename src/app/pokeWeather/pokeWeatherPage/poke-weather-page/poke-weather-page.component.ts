@@ -34,14 +34,14 @@ export class PokeWeatherPageComponent implements OnInit {
   }
 
   
-  async onSubmit(){
-    await this.getWeatherPerCity(this.form.value.nameCity)
+  onSubmit(){
+    this.getWeatherPerCity(this.form.value.nameCity)
 
     this.form.reset();
   }
 
-  async getWeatherPerCity(cityName: string) {
-    this._pokeWeatherService.getWeatherPerCity(cityName).subscribe(async el => {
+  getWeatherPerCity(cityName: string) {
+    this._pokeWeatherService.getWeatherPerCity(cityName).subscribe(el => {
       const { temp, name, description } = {
         temp: (el.main.temp - 273.15),
         name: el.name,
@@ -55,7 +55,7 @@ export class PokeWeatherPageComponent implements OnInit {
       };
 
       this.typePokemon = this._pokeWeatherService.getPokemonByWeather(this.resultWeatherCity);
-      await this.getPokemon();
+      this.getPokemon();
     },
     error => {
       this.openDialog(`City not found!`);
@@ -63,7 +63,7 @@ export class PokeWeatherPageComponent implements OnInit {
     });
   }
 
-  async getPokemon(){
+  getPokemon(){
     this._pokeWeatherService.playloadPokemon().subscribe(el => {
       this.pokemons = el.filter((pokemon) => pokemon.types === this.typePokemon)
       const randomIndex = Math.floor(Math.random() * this.pokemons.length);
